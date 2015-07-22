@@ -1,0 +1,15 @@
+<h3>News page</h3>
+
+<div id="content" style="max-width:900px;margin:0 auto;">
+    
+	<table class="table">
+		
+		<tbody>
+			<tr ng-repeat="item in data.item">
+				<td class="col-xs-8">{{item.title}}</td><td class="col-xs-4">{{item.pubDate | date: 'yyyy-MM-dd'}}</td>
+			</tr>
+		</tbody>		
+	</table>
+	<div style="height:50px;">
+	</div>
+</div>

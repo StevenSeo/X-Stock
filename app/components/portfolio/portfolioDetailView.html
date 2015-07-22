@@ -1,0 +1,40 @@
+
+
+
+<div id="content">
+
+    <div id="title" style="max-width:900px;margin:0 auto;">
+        <div style="font-weight: bold;">{{ data.symbol }} {{ data.Name }}</div> 
+            <div>
+                    <span>${{data.LastTradePriceOnly}}</span> <span ng-class="data.Change < 0 ? 'red':'green' ">{{data.Change}} ({{data.ChangeinPercent}})</span>
+            </div>
+    
+
+    <ul class="nav nav-tabs">
+        <li ng-class="{'active' : type == 1}"><a href="" ng-click="loadTodayData()">Today</a></li>
+        <li ng-class="{'active' : type == 2}"><a href="" ng-click="loadPastData_1m()" >1m</a></li>
+        <li ng-class="{'active' : type == 3}"><a href="" ng-click="loadPastData_6m()">6m</a></li>
+        <li ng-class="{'active' : type == 4}"><a href="" ng-click="loadPastData_1y()" >1y</a></li>
+    </ul>
+    
+    <div style="outline: 1px solid #ddd;">
+		<nvd-line-chart val="exampleData" width="400" lastprice="{{previousPrice}}" height="100" stb="11"></nvd-line-chart>
+    </div>
+    
+    
+	<table class="table">				
+		<tbody>
+			<tr><td class="col-xs-6">Day Range</td><td class="col-xs-6" style="text-align: right">{{ data.DaysRange}}</td></tr>
+			<tr><td class="col-xs-6">52w Range</td><td class="col-xs-6" style="text-align: right">{{ data.YearRange}}</td></tr>
+			<tr><td class="col-xs-6">E.P.S</td><td class="col-xs-6" style="text-align: right">{{ data.EarningsShare}}</td></tr>
+			<tr><td class="col-xs-6">PE</td><td class="col-xs-6" style="text-align: right">{{ data.PERatio}}</td></tr>
+			<tr><td class="col-xs-6">DIV</td><td class="col-xs-6" style="text-align: right">{{ data.DividendShare}}</td></tr>
+			<tr><td class="col-xs-6">Yield</td><td class="col-xs-6" style="text-align: right">{{ data.DividendYield}}</td></tr>
+			<tr><td class="col-xs-6">Market Cap</td><td class="col-xs-6" style="text-align: right">{{ data.MarketCapitalization}}</td></tr>
+			<tr><td class="col-xs-6">Volume</td><td class="col-xs-6" style="text-align: right">{{ data.Volume}}</td></tr>
+			<tr><td class="col-xs-6">1y Target Est</td><td class="col-xs-6" style="text-align: right">{{ data.OneyrTargetPrice}}</td></tr>
+					
+       </tbody>
+	</table>
+    </div>
+</div>

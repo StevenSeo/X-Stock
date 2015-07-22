@@ -1,0 +1,71 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+    margin-bottom: 40px;
+	background-color:#F5F7F8;
+}
+h3 {
+	margin-left: 20px;
+}
+.footer {  
+    position: absolute;
+    bottom: 0;  
+    width: 100%;
+    height: 40px;
+	color:#ffffff;
+    background-color: #71A1C0;
+}
+
+.title-size-1 {
+	font-size: 1.25em;
+    margin: 10px 0 10px 10px;
+    font-weight: bold;
+}
+
+.font-size-1 {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.font-size-2 {
+	font-size: 1.1em;	
+}
+
+.footer > .container {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.red {
+	color:red;
+}
+
+.green {
+	color:#22B500;
+}
+
+.column-wrapper {
+overflow: hidden;
+	margin-bottom:25px;
+	padding:10px;
+	background-color:#ffffff;
+}
+
+.angucomplete-row .angucomplete-title  {
+  PADDING: 5PX 0PX;
+  BORDER-BOTTOM: 1PX SOLID #CCC;
+  }
+  
+  .deleteBtn {
+      cursor: pointer;
+  }
+  .navbar-custom {
+	background-color:#71A1C0;
+  }
+  .navbar-custom a {		
+	color:#FFFFFF !important;
+  }  
+  .navbar-custom li a:hover {		
+	text-decoration: underline;
+  }  

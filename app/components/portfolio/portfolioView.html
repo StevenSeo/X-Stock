@@ -1,0 +1,144 @@
+<div id="content" style="max-width:1200px;margin:0 auto;">
+
+<div class="row">
+	<div class="col-xs-6 row-margin">
+		<div class="column-wrapper">
+			<div class="title-size-1">Overview</div>
+			
+			<div style="margin:20px 0 0 20px; height:180px">
+				<div class="row">
+					<div class="col-xs-4"><div class="font-size-2">Total Market Price:</div></div>
+					<div class="col-xs-8"><div class="font-size-1">${{marketPriceTotal | number:2}}</div></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4"><div class="font-size-2">Total Gain/Loss:</div></div>
+					<div class="col-xs-8"><div class="font-size-1">${{gainlossTotal | number:2}}</div></div>
+				</div>				
+				<div class="row">
+					<div class="col-xs-4"><div class="font-size-2">Percentage:</div></div>
+					<div class="col-xs-8"><div class="font-size-1">{{gainlossTotal/marketPriceTotal*100 | number:2}}%</div></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4"><div class="font-size-2"></div></div>
+					<div class="col-xs-8"><div class="font-size-1"></div></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="col-xs-6">
+		<div class="column-wrapper">
+			<div class="title-size-1">Total Market Chart</div>
+			<nvd-line-chart val="historyData" width="300" height="100" lastprice="10000" stb="E01B5D"></nvd-line-chart>
+		</div>
+	</div>	
+</div>
+<div class="row">
+	<div class="col-xs-6">
+		<div class="column-wrapper">
+			<div class="title-size-1">Gain/Loss</div>
+			<nvd-bar-chart val="portfolioData" width="350" height="350"></nvd-bar-chart>
+		</div>
+	</div>
+	<div class="col-xs-6">
+		<div class="column-wrapper">
+			<div class="title-size-1">Percentage of My Portfolio</div>
+			<nvd-pie-chart val="portfolioData" width="350" height="350"></nvd-pie-chart>
+		</div>
+	</div>
+</div>
+
+    <div class="row">
+	
+	<div class="col-xs-8">
+		<div class="column-wrapper">
+			<div class="title-size-1">Portfolio List</div>
+			<angucomplete id="ex1"
+					  placeholder="Search stocks"
+					  pause="100"
+					  selectedobject="selectedSymbol"
+					  localdata="symbol"
+					  searchfields="name"
+					  titlefield="name"
+					  minlength="2"
+					  inputclass="form-control form-control-small"
+					  buttonclick="add(selectedSymbol.originalObject.code)"/>
+			
+			<br>
+			
+			<table class="table">	
+				<thead>
+					<tr>
+						<td><a href="" ng-click="sortType = 'symbol'; sortReverse = !sortReverse">Symbol</a></td>
+						<td style="text-align: center"><a href="" ng-click="sortType = 'lastprice'; sortReverse = !sortReverse">Last Price</a></td>
+						<td style="text-align: center"><a href="" ng-click="sortType = 'unitprice'; sortReverse = !sortReverse">Unit Price</a></td>
+						<td style="text-align: center"><a href="" ng-click="sortType = 'qty'; sortReverse = !sortReverse">Qty</a></td>
+						<td style="text-align: center"><a href="" ng-click="sortType = 'marketvalue'; sortReverse = !sortReverse">Market Value</a></td>
+						<td style="text-align: center"><a href="" ng-click="sortType = 'change'; sortReverse = !sortReverse">Change</a></td>
+						<td style="text-align: center"><a href="" ng-click="sortType = 'gainloss'; sortReverse = !sortReverse">Gain/Loss</a></td>
+						<td></td>
+					</tr>
+				</thead>
+		
+				<tbody>
+					<tr ng-repeat="item in data | orderBy:sortType:sortReverse">
+						<td class="col-xs-2"><a href="#{{url}}/{{item.symbol}}">{{item.symbol}}</a></td>
+						<td class="col-xs-2" style="text-align: right">{{item.lastprice | number:2}}</td>
+						<td class="col-xs-1" style="text-align: right">{{item.unitprice}}</td>
+						<td class="col-xs-1" style="text-align: right">{{item.qty}}</td>
+						<td class="col-xs-1" style="text-align: right">{{item.marketvalue | number:2}}</td>
+						<td class="col-xs-2" style="text-align: right" ng-class="item.change < 0 ? 'red':'green' ">{{item.change | number:2}} ( {{item.changeinPercent}})</td>
+						<td class="col-xs-2" style="text-align: right" ng-class="item.gainloss < 0 ? 'red':'green' ">{{item.gainloss | number:2}}</td>
+										<td class="col-xs-1 text-right"><button class="btn btn-default btn-sm" type="button" ng-click="delete(item.symbol)">-</button>
+											</td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td style="text-align: right">{{marketPriceTotal | number:2}}</td>
+						<td></td>
+						<td style="text-align: right" ng-class="gainlossTotal < 0 ? 'red':'green' ">{{gainlossTotal | number:2}}</td>
+						<td></td>
+					</tr>
+			
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="col-xs-4">
+		<div class="column-wrapper">
+				<div class="title-size-1">Watch List</div>
+				<angucomplete id="ex1"
+						  placeholder="Search stocks"
+						  pause="100"
+						  selectedobject="selectedSymbol"
+						  localdata="symbol"
+						  searchfields="name"
+						  titlefield="name"
+						  minlength="2"
+						  inputclass="form-control form-control-small"
+						  buttonclick="addWatch(selectedSymbol.originalObject.code)"/>
+				
+				<br>
+				  
+				<table class="table">		
+					<tbody>
+						<tr ng-repeat="item in dataWatch.quote">
+							<td class="col-xs-6"><a href="#{{url}}/{{item.symbol}}">{{item.symbol}}</a></td>
+							<td class="col-xs-2" style="text-align: right">{{item.LastTradePriceOnly | number:2}}</td>
+							<td class="col-xs-3" style="text-align: right" ng-class="item.Change < 0 ? 'red':'green' ">{{item.Change | number:2}} ( {{item.ChangeinPercent }})</td>
+											<td class="col-xs-1 text-right"><button class="btn btn-default btn-sm" type="button" ng-click="deleteWatch(item.symbol)">-</button>
+												</td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
+	</div>
+	
+	
+	</div>
+</div>
+
